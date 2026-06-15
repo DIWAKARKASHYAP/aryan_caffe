@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-espresso: #2c1a0e;
+  --color-cream: #fdf6ec;
+  --color-amber: #d4882a;
+  --color-amber-light: #f5e6d0;
+  --color-sage: #8faf8a;
+  --color-sage-light: #e8f0e6;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    background-color: var(--color-cream);
+    color: var(--color-espresso);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .animate-bounce-once {
+    animation: bounce-once 0.4s ease;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease;
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.3s ease;
+  }
+}
+
+@keyframes bounce-once {
+  0%, 100% { transform: scale(1); }
+  40% { transform: scale(1.12); }
+  70% { transform: scale(0.96); }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
