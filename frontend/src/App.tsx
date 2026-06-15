@@ -22,10 +22,17 @@ function AppContent() {
         <span className="text-4xl">☕</span>
         <p className="text-lg font-semibold">Could not connect to server</p>
         <p className="text-sm text-espresso/60">{error}</p>
-        <p className="text-xs text-espresso/40 mt-2">
-          Make sure MongoDB is running and start the backend with{' '}
-          <code className="bg-white px-2 py-0.5 rounded">npm run dev:backend</code>
+        <p className="text-xs text-espresso/40 mt-2 max-w-sm">
+          Check that the API is deployed at{' '}
+          <code className="bg-white px-1 rounded">aryan-caffe-api.vercel.app</code> and
+          redeploy the frontend after changing <code className="bg-white px-1 rounded">global.js</code>.
         </p>
+        <button
+          onClick={() => window.location.reload()}
+          className="mt-2 rounded-xl bg-espresso text-cream px-5 py-2.5 text-sm font-semibold"
+        >
+          Retry
+        </button>
       </div>
     )
   }

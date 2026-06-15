@@ -8,7 +8,25 @@ import tablesRouter from './routes/tables.js'
 
 const app = express()
 
-app.use(cors())
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:4173',
+  'https://aryan-caffe.vercel.app',
+  /^https:\/\/aryan-caffe[\w-]*\.vercel\.app$/,
+  /^https:\/\/[\w-]+\.vercel\.app$/,
+]
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin) return callback(null, true)
+      const ok = allowedOrigins.some((o) =>
+        o instanceof RegExp ? o.test(origin) : o === origin,
+      )
+      callback(null, ok)
+    },
+  }),
+)
 app.use(express.json({ limit: '5mb' }))
 
 app.get('/api/health', (_req, res) => {

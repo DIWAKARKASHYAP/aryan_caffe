@@ -1,7 +1,11 @@
 import type { CartLine, Order, OrderStatus, Product } from '../types'
-import { BASE_API } from '../../global.js'
+import { getApiBase } from '../../global.js'
 
-const API = import.meta.env.DEV ? '/api' : `${BASE_API}/api`
+// Dev: Vite proxy → /api. Production: full URL from global.js or VITE_BASE_API env.
+const API =
+  import.meta.env.DEV && !import.meta.env.VITE_BASE_API
+    ? '/api'
+    : getApiBase(import.meta.env.VITE_BASE_API)
 
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const res = await fetch(url, {
@@ -85,3 +89,5 @@ export function addTable(number: number): Promise<number[]> {
 export function removeTable(number: number): Promise<number[]> {
   return request<number[]>(`${API}/tables/${number}`, { method: 'DELETE' })
 }
+
+export { API as API_BASE }
