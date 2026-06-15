@@ -1,6 +1,7 @@
 import type { CartLine, Order, OrderStatus, Product } from '../types'
+import { BASE_API } from '../../global.js'
 
-const API = '/api'
+const API = import.meta.env.DEV ? '/api' : `${BASE_API}/api`
 
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const res = await fetch(url, {
